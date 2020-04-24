@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import os
+import itertools as it
 import random
 from datetime import datetime, date
 from multiprocessing import Pool
@@ -42,7 +43,7 @@ def is_float_try(str):
         return True
     except ValueError:
         return False
-        
+
 def main_process(lib, n_sample, p, prefix, m, HD, l):
     print ("Processing Begins at: " + get_date_time())
  
@@ -52,7 +53,8 @@ def main_process(lib, n_sample, p, prefix, m, HD, l):
 
     hd_sample20 = p.map(f2, [[lib[x] for x in random.sample(
         range(len(lib)), n_sample)] for _ in range(m)])
-    total_dict = dict.fromkeys(range(0, 21), 0)
+
+    total_dict = dict.fromkeys(range(0, l+1), 0)
 
     summary = open(prefix + 'summary.txt', 'a+')
     for h, i in enumerate(hd_sample20):
@@ -65,7 +67,7 @@ def main_process(lib, n_sample, p, prefix, m, HD, l):
 
     for key, value in total_dict.items():
         summary.write('Sampling Summary' + '\t' +
-                      str(key) + ': ' + str(value / 20) + '\n')
+                      str(key) + ': ' + str(value / l) + '\n')
 
     summary.close()
     total_dict = dict((k, v / len(hd_sample20)) for k, v in total_dict.items())
@@ -84,8 +86,11 @@ if __name__ == '__main__':
 
     if HD < 1:
         HD = math.ceil(HD * l)
-
+        
+    assert HD < l
     t = arguments[5]
+
+    
 
     # Argument for CPU and Prefix is optional
     if is_float_try(t):
@@ -111,3 +116,9 @@ if __name__ == '__main__':
     n_sample = R
     p = Pool(t)
     main_process(lib, n_sample, p, prefix, m, HD, l)
+
+'''
+python barcode_generation.py 50000 30 2500 20 0.35 3 test_run
+Processing Begins at: 2020-04-25 00:41:35
+Processing Ended at: 2020-04-25 00:45:23
+'''

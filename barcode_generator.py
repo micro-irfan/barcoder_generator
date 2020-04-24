@@ -90,8 +90,6 @@ if __name__ == '__main__':
     assert HD < l
     t = arguments[5]
 
-    
-
     # Argument for CPU and Prefix is optional
     if is_float_try(t):
         if arguments[6]:

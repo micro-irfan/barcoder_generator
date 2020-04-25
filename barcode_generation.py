@@ -60,7 +60,7 @@ def main_process(lib, n_sample, p, prefix, m, HD, l):
     for h, i in enumerate(hd_sample20):
         for key, value in i.items():
             total_dict[key] += value
-            summary.write('Sample ' + str(h) + '\t' +
+            summary.write('Sample ' + str(h+1) + '\t' +
                           str(key) + ': ' + str(value) + '\n')
             if key == l:
                 summary.write('\n')

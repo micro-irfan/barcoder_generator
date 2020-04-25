@@ -16,3 +16,5 @@ python barcode_generation.py 300000 20 10000 20 0.40 3 300k_20l
 ```
 
 This will generate 300000 random sequences with a length of 20. It will random sampled 20 times with a 10000 sample size. Hammding distance of less than 0.4 * l = 8 is removed into another seperate file for post-processing. HD argument can receive percentage in floating number (ie. HD < 1) or receive integers ie. HD > 1. Optional arguments are Number of Core (default is 1) and Prefix for file name. In this case, it uses 3 CPU cores and file names are prefix with 300k_20l.
+
+It took 40 minutes to run the code above. 

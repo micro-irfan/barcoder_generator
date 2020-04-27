@@ -77,6 +77,9 @@ def main_process(lib, n_sample, p, prefix, m, HD, l):
 
 if __name__ == '__main__':
     arguments = sys.argv[1:]
+    if arguments[0] == 'help':
+        print ('python barcode_generation.py <number of sequence> <length of sequence> <sample size> <number of sampling> <Minimum Hamming Distance> <Number of Core> <Prefix for File names>')
+    
     n = int(arguments[0])
     l = int(arguments[1])
     assert l < 50
